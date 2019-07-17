@@ -34,9 +34,9 @@ const util = require('util');
 
 util.promisify(fs.readFile)(filePath)
     .then(data => {
-        util.promisify(fs.readFile)(path.resolve(__dirname, data.toString())).then(data => {
-            console.log(data.toString())
-        }).catch(err => {
-                console.error(err);
-            })
+        return util.promisify(fs.readFile)(path.resolve(__dirname, data.toString()))
+    }).then(data => {
+        console.log(data.toString())
+    }).catch(err => {
+        console.error("出错了：" + err);
     })
